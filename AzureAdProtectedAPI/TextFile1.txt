@@ -1,29 +1,47 @@
 {
-  "aud": "api://d269eec9-5d0a-409d-bf69-0426237a7153",
+  "aud": "00000003-0000-0000-c000-000000000000",
   "iss": "https://sts.windows.net/9e8754b6-f9cd-4aed-974d-a0ec0f3ed703/",
-  "iat": 1710719023,
-  "nbf": 1710719023,
-  "exp": 1710724225,
+  "iat": 1710719148,
+  "nbf": 1710719148,
+  "exp": 1710724559,
+  "acct": 0,
   "acr": "1",
-  "aio": "AaQAW/8WAAAAo0x1I2j5cg6pFoPBntEaRNndpD8JFfAJcFoqpIeYQKJa1eYDIfP5JcID5OTtwA9zenYWsicTgwl+1iWwhhlt8Vx0sLrLKFjwRt1K2y68JOC0AcT+p5AnwC/wc7FMoG7JEq9ZvhuCuEOVrfecFp5uYvZYcPhRSMtE/Pda2sX+fRBEXqb1WK0qXjtcLyEKy/n1PzruZXz4hgkOc9Rj8Dr87Q==",
+  "aio": "AYQAe/8WAAAA3u5cwwU/Poz5FtfZ/8q6qsCKWjZrmEesUQ3tUhzQYZPNNYuNuQQ+33PJfvpbO2X9BJSWomQuweOEAdoC5nh94OuItFsyt1AekYzHsgRqZO3GXNX33HRfm/abMT19mM5ohjF857CsGuLP30VNWtbTi4pf135cYtjvxB2mStLVb5A=",
+  "altsecid": "1:live.com:00067FFE932C91E2",
   "amr": [
     "pwd",
     "mfa"
   ],
+  "app_displayname": "JwtServiceWebClient",
   "appid": "55317597-9ae0-4183-96f3-1bd60ca8fe4c",
   "appidacr": "1",
   "email": "hemant_shelar@hotmail.com",
   "family_name": "Shelar",
   "given_name": "Hemant",
   "idp": "live.com",
+  "idtyp": "user",
   "ipaddr": "220.240.14.77",
   "name": "Hemant Shelar",
   "oid": "1f87af35-5380-457b-a43c-74de7fb6c47a",
-  "rh": "0.AWcAtlSHns357UqXTaDsDz7XA8nuadIKXZ1Av2kEJiN6cVNnAKM.",
-  "scp": "CardReader TestScope",
-  "sub": "X-GddvHH6VXR37DJKPf_JEUB2-71xTUBllJm7UI7fbM",
+  "platf": "3",
+  "puid": "10033FFF8A231130",
+  "rh": "0.AWcAtlSHns357UqXTaDsDz7XAwMAAAAAAAAAwAAAAAAAAABnAKM.",
+  "scp": "User.Read profile openid email",
+  "signin_state": [
+    "kmsi"
+  ],
+  "sub": "iUUO_xKRdwd8Sxjtl-sYYIpT5GJRdu9kB4p2Cu8MKyc",
+  "tenant_region_scope": "OC",
   "tid": "9e8754b6-f9cd-4aed-974d-a0ec0f3ed703",
   "unique_name": "live.com#hemant_shelar@hotmail.com",
-  "uti": "4zfqXm86ZEyLay0IJUMLAA",
-  "ver": "1.0"
+  "uti": "2byNHWXfmEewkG4g6_8JAA",
+  "ver": "1.0",
+  "wids": [
+    "62e90394-69f5-4237-9190-012177145e10",
+    "b79fbf4d-3ef9-4689-8143-76b194e85509"
+  ],
+  "xms_st": {
+    "sub": "-P6-w4LtTWULcyBkUY78xJM4wC_uROr5LzwcIZ-sJtg"
+  },
+  "xms_tcdt": 1401665436
 }
