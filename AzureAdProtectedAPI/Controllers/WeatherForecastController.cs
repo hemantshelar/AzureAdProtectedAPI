@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Web.Resource;
 
 namespace AzureAdProtectedAPI.Controllers
 {
-	[Authorize]
 	[ApiController]
-	[Route("[controller]")]
+	[Route("[controller]/[action]")]
 	public class WeatherForecastController : ControllerBase
 	{
 		private static readonly string[] Summaries = new[]
@@ -21,6 +21,7 @@ namespace AzureAdProtectedAPI.Controllers
 		}
 
 		[HttpGet(Name = "GetWeatherForecast")]
+		[Authorize()]
 		public IEnumerable<WeatherForecast> Get()
 		{
 			return Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -30,6 +31,16 @@ namespace AzureAdProtectedAPI.Controllers
 				Summary = Summaries[Random.Shared.Next(Summaries.Length)]
 			})
 			.ToArray();
+		}
+
+		[HttpGet]
+		[Route("onlyfortestscope")]
+		[RequiredScope("CardReader")]
+		[Authorize]
+		public string OnlyForTestScope()
+		{
+			return "You have access to this API";
+			//https://github.com/AzureAD/microsoft-identity-web/issues/1571
 		}
 	}
 }
