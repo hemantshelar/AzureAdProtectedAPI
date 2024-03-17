@@ -1,4 +1,7 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Identity.Web;
+
 namespace AzureAdProtectedAPI
 {
 	public class Program
@@ -13,6 +16,8 @@ namespace AzureAdProtectedAPI
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
+			builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+				.AddJwtBearer(o => builder.Configuration.Bind("AzureAd", o));
 
 			var app = builder.Build();
 
