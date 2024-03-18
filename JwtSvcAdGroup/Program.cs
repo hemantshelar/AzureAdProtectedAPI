@@ -1,5 +1,7 @@
+using JwtSvcAdGroup.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Identity.Web;
 
 namespace JwtSvcAdGroup
@@ -18,6 +20,27 @@ namespace JwtSvcAdGroup
 				})
 				.AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraph"))
 				.AddInMemoryTokenCaches();
+
+			builder.Services.AddSingleton<IAuthorizationHandler, GroupAuthorizationHandler>();
+			builder.Services.AddAuthorization(options =>
+			{
+
+				options.AddPolicy("GroupAdmin", policy =>
+				{
+					var groupName = builder.Configuration.GetSection("JwtServiceGroups:JwtServiceOperators").Value;
+					policy.RequireAuthenticatedUser();
+					policy.AddRequirements(new GroupAuthorizationRequirement(groupName));
+				});
+
+				options.AddPolicy("Group2", policy =>
+				{
+					policy.RequireAuthenticatedUser();
+					policy.RequireClaim("groups", "group2");
+				});
+
+			});
+
+
 
 			// Add services to the container.
 

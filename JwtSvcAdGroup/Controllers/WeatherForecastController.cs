@@ -5,8 +5,8 @@ using Microsoft.Graph;
 
 namespace JwtSvcAdGroup.Controllers
 {
-	[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
-	[Authorize]
+	//[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
+	[Authorize(Policy = "GroupAdmin")]
 	[ApiController]
 	[Route("[controller]")]
 	public class WeatherForecastController : ControllerBase
@@ -22,13 +22,13 @@ namespace JwtSvcAdGroup.Controllers
 		public WeatherForecastController(ILogger<WeatherForecastController> logger, GraphServiceClient graphServiceClient)
 		{
 			_logger = logger;
-            _graphServiceClient = graphServiceClient;
+			_graphServiceClient = graphServiceClient;
 		}
 
 		[HttpGet(Name = "GetWeatherForecast")]
 		public async Task<IEnumerable<WeatherForecast>> Get()
 		{
-            var user = await _graphServiceClient.Me.Request().GetAsync();
+			var user = await _graphServiceClient.Me.Request().GetAsync();
 			return Enumerable.Range(1, 5).Select(index => new WeatherForecast
 			{
 				Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
