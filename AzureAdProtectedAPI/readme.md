@@ -17,3 +17,9 @@ https://login.microsoftonline.com/9e8754b6-f9cd-4aed-974d-a0ec0f3ed703/oauth2/v2
 ## Postman request to trade code for token
 
 ![Postman post request](./docs/imgs/tradeCodeForAccessToken.png)
+
+
+
+## [Role Base Authentication](https://www.youtube.com/watch?v=5lRbtDSyjjs)
+
+## [AD Group based Autherization](https://www.youtube.com/watch?v=pcWdR0LcNaI)

@@ -8,7 +8,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ABEAA451-F2A1-4D0B-A98C-22B955FC122E}"
 	ProjectSection(SolutionItems) = preProject
 		readme.md = readme.md
-		TextFile1.txt = TextFile1.txt
 		tradeCodeForAccessToken.png = tradeCodeForAccessToken.png
 	EndProjectSection
 EndProject
