@@ -21,26 +21,25 @@ namespace JwtSvcAdGroup
 				.AddMicrosoftGraph(builder.Configuration.GetSection("MicrosoftGraph"))
 				.AddInMemoryTokenCaches();
 
-			builder.Services.AddSingleton<IAuthorizationHandler, GroupAuthorizationHandler>();
+			builder.Services.AddSingleton<IAuthorizationHandler, AdminGroupAuthorizationHandler>();
+			builder.Services.AddSingleton<IAuthorizationHandler, NonAdminGroupAuthorizationHandler>();
 			builder.Services.AddAuthorization(options =>
 			{
 
 				options.AddPolicy("GroupAdmin", policy =>
 				{
-					var groupName = builder.Configuration.GetSection("JwtGroups:JwtAdminTest").Value;
+					var groupNameAdmin = builder.Configuration.GetSection("JwtGroups:JwtAdminTest").Value;
 					policy.RequireAuthenticatedUser();
-					policy.AddRequirements(new GroupAuthorizationRequirement(groupName));
+					policy.AddRequirements(new AdminGroupAuthorizationRequirement(groupNameAdmin));
 				});
 
-				options.AddPolicy("Group2", policy =>
+				options.AddPolicy("GroupNonAdmin", policy =>
 				{
+					var groupNameNonAdmin = builder.Configuration.GetSection("JwtGroups:JwtNonAdminTest").Value;
 					policy.RequireAuthenticatedUser();
-					policy.RequireClaim("groups", "group2");
+					policy.AddRequirements(new NonAdminGroupAuthorizationRequirement(groupNameNonAdmin));
 				});
-
 			});
-
-
 
 			// Add services to the container.
 
