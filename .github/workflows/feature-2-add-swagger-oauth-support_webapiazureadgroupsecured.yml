@@ -22,6 +22,9 @@ jobs:
           dotnet-version: '8.x'
           include-prerelease: true
 
+      - name: List files
+        run: |
+          dir /s /b
       - name: Build with dotnet
         run: dotnet build **/JwtSvcAdGroup.csproj --configuration Release
 
