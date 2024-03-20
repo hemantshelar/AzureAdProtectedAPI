@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Identity.Web;
+using Microsoft.OpenApi.Models;
 
 namespace JwtSvcAdGroup
 {
@@ -47,6 +48,42 @@ namespace JwtSvcAdGroup
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
+			var scopes = new Dictionary<string, string>();
+			scopes.Add("api://25afc9bd-3f17-41d1-b3d3-29d78f1cf373/access_as_user", "access_as_user");
+			builder.Services.AddSwaggerGen(options =>
+			{
+				options.AddSecurityRequirement(new OpenApiSecurityRequirement()
+				{
+					{
+						new OpenApiSecurityScheme
+						{
+							Reference = new OpenApiReference
+							{
+								Type = ReferenceType.SecurityScheme,
+								Id = "oauth2"
+							},
+							Scheme = "oauth2",
+							Name = "oauth2",
+							In = ParameterLocation.Header
+						},
+						new List <string> ()
+					}
+				});
+
+				options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+				{
+					Type = SecuritySchemeType.OAuth2,
+					Flows = new OpenApiOAuthFlows
+					{
+						Implicit = new OpenApiOAuthFlow()
+						{
+							AuthorizationUrl = new Uri("https://login.microsoftonline.com/9e8754b6-f9cd-4aed-974d-a0ec0f3ed703/oauth2/v2.0/authorize"),
+							TokenUrl = new Uri("https://login.microsoftonline.com/9e8754b6-f9cd-4aed-974d-a0ec0f3ed703/oauth2/v2.0/token"),
+							Scopes = scopes
+						}
+					}
+				});
+			});
 
 			var app = builder.Build();
 
@@ -54,7 +91,11 @@ namespace JwtSvcAdGroup
 			if (app.Environment.IsDevelopment())
 			{
 				app.UseSwagger();
-				app.UseSwaggerUI();
+				app.UseSwaggerUI(o =>
+				{
+					o.OAuthClientId("4c2d1c78-9caa-4e3a-9304-3bda78df07c5");
+					o.OAuthAppName("JwtSvcAdGroup");
+				});
 			}
 
 			app.UseHttpsRedirection();
