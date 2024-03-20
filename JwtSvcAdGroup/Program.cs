@@ -50,6 +50,8 @@ namespace JwtSvcAdGroup
 			builder.Services.AddSwaggerGen();
 			var scopes = new Dictionary<string, string>();
 			scopes.Add("api://25afc9bd-3f17-41d1-b3d3-29d78f1cf373/access_as_user", "access_as_user");
+			scopes.Add("profile", "profile");
+			scopes.Add("openid", "openid");
 			builder.Services.AddSwaggerGen(options =>
 			{
 				options.AddSecurityRequirement(new OpenApiSecurityRequirement()
@@ -94,7 +96,7 @@ namespace JwtSvcAdGroup
 				app.UseSwaggerUI(o =>
 				{
 					o.OAuthClientId("4c2d1c78-9caa-4e3a-9304-3bda78df07c5");
-					o.OAuthAppName("JwtSvcAdGroup");
+					o.OAuthAppName("JwtSvc PoC");
 				});
 			}
 
