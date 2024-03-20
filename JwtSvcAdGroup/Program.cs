@@ -27,7 +27,7 @@ namespace JwtSvcAdGroup
 
 				options.AddPolicy("GroupAdmin", policy =>
 				{
-					var groupName = builder.Configuration.GetSection("JwtServiceGroups:JwtServiceOperators").Value;
+					var groupName = builder.Configuration.GetSection("JwtGroups:JwtAdminTest").Value;
 					policy.RequireAuthenticatedUser();
 					policy.AddRequirements(new GroupAuthorizationRequirement(groupName));
 				});

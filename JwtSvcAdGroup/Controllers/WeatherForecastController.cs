@@ -6,7 +6,6 @@ using Microsoft.Graph;
 namespace JwtSvcAdGroup.Controllers
 {
 	//[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
-	[Authorize(Policy = "GroupAdmin")]
 	[ApiController]
 	[Route("[controller]")]
 	public class WeatherForecastController : ControllerBase
@@ -26,6 +25,7 @@ namespace JwtSvcAdGroup.Controllers
 		}
 
 		[HttpGet(Name = "GetWeatherForecast")]
+		[AllowAnonymous]
 		public async Task<IEnumerable<WeatherForecast>> Get()
 		{
 			var user = await _graphServiceClient.Me.Request().GetAsync();
@@ -36,6 +36,24 @@ namespace JwtSvcAdGroup.Controllers
 				Summary = Summaries[Random.Shared.Next(Summaries.Length)]
 			})
 			.ToArray();
+		}
+
+		[HttpGet()]
+		[Authorize(Policy = "GroupNonAdmin")]
+		[Route("NonAdminTestOperation")]
+		public string NonAdminTestOeration()
+		{
+			var result = "This is a non-admin test operation";
+			return result;
+		}
+
+		[HttpGet()]
+		[Authorize(Policy = "GroupAdmin")]
+		[Route("AdminTestOperation")]
+		public string AdminTestOeration()
+		{
+			var result = "This is a admin test operation";
+			return result;
 		}
 	}
 }
