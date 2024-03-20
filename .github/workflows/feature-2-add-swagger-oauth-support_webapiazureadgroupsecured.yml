@@ -25,7 +25,7 @@ jobs:
       - name: List files
         run: dir 
       - name: Build with dotnet
-        run: dotnet build **/JwtSvcAdGroup.csproj --configuration Release
+        run: dotnet build ./JwtSvcAdGroup/JwtSvcAdGroup.csproj --configuration Release
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
